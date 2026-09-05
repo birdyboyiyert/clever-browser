@@ -7,43 +7,29 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <div class="brand"><span class="dot" id="status-dot"></span> clever</div>
-    <div class="meta">
-      <span>uptime <b id="stat-uptime">0s</b></span>
-      <span>instructions <b id="stat-instr">0</b></span>
+  <div class="toolbar">
+    <button id="btn-back" title="back" disabled>&larr;</button>
+    <button id="btn-fwd" title="forward" disabled>&rarr;</button>
+    <button id="btn-reload" title="reload">&#8635;</button>
+    <form id="nav-form" autocomplete="off">
+      <input id="address" type="text" placeholder="search or enter a URL" spellcheck="false" />
+    </form>
+    <button id="btn-go" type="submit" form="nav-form">Go</button>
+    <button id="btn-newtab" title="open in a new tab">&#8599;</button>
+  </div>
+
+  <div class="viewport">
+    <iframe id="frame" title="clever browser"></iframe>
+    <div id="blank-hint" class="hint">
+      type a URL above and hit Go &mdash; e.g. <a href="#" data-url="https://en.wikipedia.org">en.wikipedia.org</a>,
+      <a href="#" data-url="https://news.ycombinator.com">news.ycombinator.com</a>,
+      <a href="#" data-url="https://example.com">example.com</a>
+      <br /><br />
+      <span class="dim">some sites refuse to be shown inside another page (their own security header, not a bug here) &mdash;
+      those open in a new tab instead.</span>
     </div>
-    <a class="gh" href="https://github.com/copy/v86" target="_blank" rel="noopener">powered by v86 (BSD-2)</a>
-  </header>
+  </div>
 
-  <main>
-    <div id="boot-progress">
-      <div>booting linux &mdash; downloading <span id="boot-file">kernel</span>&hellip; <span id="boot-pct">0%</span></div>
-      <div class="bar"><div class="fill" id="boot-fill"></div></div>
-    </div>
-
-    <div class="terminal-wrap">
-      <div id="terminal"></div>
-    </div>
-
-    <div class="controls">
-      <div class="buttons">
-        <button id="btn-restart" disabled>restart</button>
-        <button id="btn-pause" disabled>pause</button>
-        <button class="danger" id="btn-stop" disabled>stop</button>
-      </div>
-      <div class="hint">everything runs in <b>this tab</b> &mdash; no server, no account, nothing leaves your browser</div>
-    </div>
-  </main>
-
-  <footer>
-    a real Linux kernel, emulated in WebAssembly, entirely client-side &middot;
-    <a href="https://github.com/copy/v86" target="_blank" rel="noopener">v86</a> does the CPU emulation, this page is the wrapper
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.css" />
-  <script src="build/libv86.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
